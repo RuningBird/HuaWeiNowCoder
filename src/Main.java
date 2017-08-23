@@ -26,18 +26,19 @@ public class Main {
      * 90000000
      */
     public static void q4() {
-//        Scanner sc = new Scanner(System.in);
-//        while (sc.hasNextLine()) {
-//            String s1 = sc.nextLine();
-//            String s2 = sc.nextLine();
-//
-//            q41(s1);
-//            q41(s2);
-//        }
-        q41("urivthvtlqqerctlxmjvkgvfclaaduwmaadedpadanl");
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()) {
+            String s1 = sc.nextLine();
+            String s2 = sc.nextLine();
+
+            q41(s1);
+            q41(s2);
+        }
+//        q41("urivthvtlqqerctlxmjvkgvfclaaduwmaadedpadanl");
     }
 
     public static void q41(String s1) {
+
         int len1 = s1.length();
         int posL1 = len1 / 8;
         for (int i = 0; i < posL1; i++) {
@@ -49,6 +50,9 @@ public class Main {
             System.out.println(bf.toString());
         }
 
+        if(len1 % 8 == 0){
+            return;
+        }
         char[] last = Arrays.copyOfRange(s1.toCharArray(), posL1 * 8, len1);//剩余的字符串
 
         char[] s1Last = new char[8]; //填充后的字符串
