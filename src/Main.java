@@ -1,11 +1,95 @@
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeSet;
+import java.math.BigInteger;
+import java.util.*;
+import java.util.function.LongToDoubleFunction;
+
 
 public class Main {
     public static void main(String[] args) {
-        q4();
+        q6();
+    }
+
+    /**
+     * 功能:输入一个正整数，按照从小到大的顺序输出它的所有质数的因子（如180的质数因子为2 2 3 3 5 ）
+     * 最后一个数后面也要有空格
+     * <p>
+     * 详细描述：
+     * <p>
+     * 函数接口说明：
+     * public String getResult(long ulDataInput)
+     * 输入参数：
+     * long ulDataInput：输入的正整数
+     * 返回值：
+     * String
+     * <p>
+     * <p>
+     * 输入描述:
+     * 输入一个long型整数
+     * 输出描述:
+     * 按照从小到大的顺序输出它的所有质数的因子，以空格隔开。最后一个数后面也要有空格。
+     * 示例1
+     * 输入
+     * 180
+     * 输出
+     * 2 2 3 3 5
+     */
+
+    /*
+    程序分析：对n进行分解质因数，应先找到一个最小的质数k，然后按下述步骤完成： 
+    (1)如果这个质数恰等于n，则说明分解质因数的过程已经结束，打印出即可。
+    (2)如果n<>k，但n能被k整除，则应打印出k的值，并用n除以k的商,作为新的正整数你n,
+　   重复执行第一步。
+    (3)如果n不能被k整除，则用k+1作为k的值,重复执行第一步。
+    * */
+    public static void q6() {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLong()) {
+            Long num = sc.nextLong();
+
+            Set<Long> set = new TreeSet<Long>();
+
+            for (long i = 2; i <= num; i++) {
+                while (num != i) {
+                    if (num % i == 0) {
+                        num = num / i;
+                       set.add(i);
+                    }
+                    else break;
+                }
+//                System.out.print(num + " ");//能整除 打印i
+                set.add(num);
+            }
+
+            for (Long aLong : set) {
+                System.out.println(aLong + " ");
+            }
+
+        }
+    }
+
+    /**
+     * 题目描述
+     * 写出一个程序，接受一个十六进制的数值字符串，输出该数值的十进制字符串。（多组同时输入 ）
+     * 输入描述:
+     * 输入一个十六进制的数值字符串。
+     * 输出描述:
+     * 输出该数值的十进制字符串。
+     * 示例1
+     * 输入
+     * 0xA
+     * 输出
+     * 10
+     */
+    public static void q5() {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()) {
+            String in = sc.nextLine();
+            String s2 = in.replace("0x", "");
+
+//        long res  =  Long.parseLong(s2,16);
+            BigInteger bres = new BigInteger(s2, 16);
+//        System.out.println(res);
+            System.out.println(bres);
+        }
     }
 
     /**
@@ -44,13 +128,13 @@ public class Main {
         for (int i = 0; i < posL1; i++) {
             StringBuffer bf = new StringBuffer();
 
-            for (int j = i * 8; j < i*8 + 8; j++) {
+            for (int j = i * 8; j < i * 8 + 8; j++) {
                 bf.append(s1.charAt(j));
             }
             System.out.println(bf.toString());
         }
 
-        if(len1 % 8 == 0){
+        if (len1 % 8 == 0) {
             return;
         }
         char[] last = Arrays.copyOfRange(s1.toCharArray(), posL1 * 8, len1);//剩余的字符串
