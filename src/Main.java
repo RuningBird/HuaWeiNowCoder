@@ -1,6 +1,5 @@
 
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
-
+import javax.print.DocFlavor;
 import java.math.BigInteger;
 import java.util.*;
 
@@ -8,13 +7,203 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-
-//        q17();
-//        listReverse();
-        Ali();
+        souhu14();
 
     }
 
+    /**
+     * 搜狐第三题
+     * 一只袋鼠要从河这边跳到河对岸，河很宽，但是河中间打了很多桩子，每隔一米就有一个，每个桩子上都有一个弹簧，袋鼠跳到弹簧上就可以跳的更远。
+     * 每个弹簧力量不同，用一个数字代表它的力量，如果弹簧力量为5，就代表袋鼠下一跳最多能够跳5米，如果为0，就会陷进去无法继续跳跃。
+     * 河流一共N米宽，袋鼠初始位置就在第一个弹簧上面，要跳到最后一个弹簧之后就算过河了，
+     * 给定每个弹簧的力量，求袋鼠最少需要多少跳能够到达对岸。
+     * 如果无法到达输出-1
+     * 输入描述:
+     * 输入分两行，第一行是数组长度N (1 ≤ N ≤ 10000)，第二行是每一项的值，用空格分隔。
+     * 输出描述:
+     * 输出最少的跳数，无法到达输出-1
+     * 输入例子1:
+     * 5
+     * 2 0 1 1 1
+     * 输出例子1:
+     * 4
+     */
+
+
+    public static void souhu3() {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()) {
+            String in = sc.nextLine();
+            int n = Integer.parseInt(in);
+
+            if (n == 0) {
+                System.out.println(n);
+                return;
+            }
+            int[] zArr = new int[n];
+            int[] X = new int[n];
+            Arrays.fill(X, 0);
+
+
+
+        }
+    }
+
+    public static void souhu3part(int[] X, int k){
+        int sum  = 0;
+        for
+    }
+
+    /**
+     * 搜狐第二题
+     * 时间限制：1秒
+     * 空间限制：32768K
+     * 有一条彩色宝石项链，是由很多种不同的宝石组成的，包括红宝石，蓝宝石，钻石，翡翠，珍珠等。
+     * 有一天国王把项链赏赐给了一个学者，并跟他说，你可以带走这条项链，
+     * 但是王后很喜欢    红宝石，蓝宝石，紫水晶，翡翠和钻石这五种，
+     * 我要你从项链中截取连续的一小段还给我，这一段中必须包含所有的这五种宝石，剩下的部分你可以带走。
+     * ·如果无法找到则一个也无法带走。
+     * 请帮助学者找出如何切分项链才能够拿到最多的宝石。
+     * 输入描述:
+     * 我们用每种字符代表一种宝石，A表示红宝石，B表示蓝宝石，C代表紫水晶，D代表翡翠，E代表钻石，F代表玉石，G代表玻璃等等，
+     * 我们用一个全部为大写字母的字符序列表示项链的宝石序列，注意项链是首尾相接的。
+     * <p>
+     * 每行代表一种情况。
+     * <p>
+     * 输出描述:
+     * 输出学者能够拿到的最多的宝石数量。每行一个
+     * <p>
+     * 输入例子1:
+     * ABCYDYE
+     * ATTMBQECPD
+     * 输出例子1:
+     * 1
+     * 3
+     */
+
+    /*逆向思维法*/
+    public static void souhu14() {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()) {
+            String in = sc.nextLine();
+            String strNum = sc.nextLine();
+
+            if (!(in.matches("[0-9]*")) || !(strNum.matches("[0-9]*"))) {
+                return;
+            }
+            StringBuffer bf = new StringBuffer("a");
+            bf.append(in);
+            short remv = Short.parseShort(strNum);
+
+            StringBuffer maxN = new StringBuffer();
+            maxN.append(9);
+            for (int i = 0; i < remv; i++) {
+                maxN.append(9);
+            }
+            String best = maxN.toString();
+
+            int index = 0;
+            for (int i = 1; i <= bf.length() - remv; i++) {
+                String tmp = bf.substring(i, i + remv);
+                if (tmp.compareTo(best) < 0) {
+                    best = tmp;
+                    index = i;
+                }
+            }
+            bf.delete(index, index + remv);
+            bf.delete(0, 1);
+            System.out.println(bf.toString());
+        }
+    }
+
+    /*拼接法*/
+    public static void souhu13() {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()) {
+            String in = sc.nextLine();
+            String strNum = sc.nextLine();
+
+            if (!(in.matches("[0-9]*")) || !(strNum.matches("[0-9]*"))) {
+                return;
+            }
+            StringBuffer bf = new StringBuffer("a");
+            bf.append(in);
+
+            short remv = Short.parseShort(strNum);
+            String best = "";
+
+            for (int i = 1; i <= bf.length() - remv; i++) {
+                String tmp = bf.substring(1, i) + bf.substring(i + remv, bf.length());
+                if (tmp.compareTo(best) > 0) {
+                    best = tmp;
+                }
+            }
+            bf = null;
+            System.out.println(best);
+        }
+    }
+
+    /*删除法：超空间*/
+    public static void souhu12() {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()) {
+            String in = sc.nextLine();
+            String strNum = sc.nextLine();
+
+            if (!(in.matches("[0-9]*")) || !(strNum.matches("[0-9]*"))) {
+                return;
+            }
+            StringBuffer bf = new StringBuffer("a");
+            bf.append(in);
+
+            int remv = Integer.parseInt(strNum);
+            String best = "";
+
+            for (int i = 1; i <= bf.length() - remv; i++) {
+                StringBuffer tBf = new StringBuffer(bf.toString());
+                tBf.delete(i, i + remv);
+                tBf.delete(0, 1);
+                String tmp = tBf.toString();
+
+                if (tmp.compareTo(best) > 0) {
+                    best = tmp;
+                }
+            }
+            System.out.println(best);
+        }
+    }
+
+    /*搜狐1-01*/
+    public static void souhu1() {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()) {
+            String in = sc.nextLine();
+            String strNum = sc.nextLine();
+
+            if (!(in.matches("[0-9]*")) || !(strNum.matches("[0-9]*"))) {
+                return;
+            }
+            StringBuffer bf = new StringBuffer("a");
+            bf.append(in);
+
+            int remv = Integer.parseInt(strNum);
+            int best = 0;
+
+            for (int i = 1; i <= bf.length() - remv; i++) {
+                StringBuffer tBf = new StringBuffer(bf.toString());
+                tBf.delete(i, i + remv);
+                tBf.delete(0, 1);
+                String tmp = tBf.toString();
+                int cnum = Integer.parseInt(tmp);
+                if (cnum > best) {
+                    best = cnum;
+                }
+            }
+            System.out.println(best);
+        }
+    }
+
+    /*阿里笔试题2，*/
     public static void Ali() {
         Scanner sc = new Scanner(System.in);
         String rexNs = "[0-9A-Za-z]*";
