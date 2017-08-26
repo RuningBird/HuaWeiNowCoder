@@ -10,7 +10,43 @@ public class Main {
     public static void main(String[] args) {
 
 //        q17();
-        listReverse();
+//        listReverse();
+        Ali();
+
+    }
+
+    public static void Ali() {
+        Scanner sc = new Scanner(System.in);
+        String rexNs = "[0-9A-Za-z]*";
+        while (sc.hasNextInt()) {
+            int n = sc.nextInt();
+            int r = getRes(n);
+            System.out.println(r);
+        }
+    }
+
+    public static int getRes(int n) {
+        int res = 0;
+        StringBuffer bf = new StringBuffer();
+        bf.append("a");
+        for (int i = 1; i <= n; i++) {
+            StringBuffer tenBf = new StringBuffer();
+            for (int j = 1; j <= i; j++) {
+                if (j < 10) {
+                    bf.append(j);
+                } else {
+                    tenBf.append(j);
+                }
+            }
+            if (i >= 10) {
+                int remain = i - 9;
+                bf.append(tenBf.substring(0, remain));
+            }
+            System.out.println(i + "  :   " + bf.toString());
+        }
+        char cRes = bf.charAt(bf.length() - 1);
+        res = Integer.parseInt(Character.toString(cRes));
+        return res;
     }
 
     /*链表*/
@@ -729,6 +765,8 @@ public class Main {
                 for (Integer s : set) {
                     System.out.println(s);
                 }
+                List l = new ArrayList();
+
             }
         }
 
