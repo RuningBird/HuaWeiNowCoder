@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Souhu03.main();
+        Souhu03.main1();
     }
 
     /**
@@ -36,7 +36,11 @@ public class Main {
 
         static int res = 2000;//记录最后跳了几次，最小的次数。初始化为最大值
 
-        public static void main() {
+        public static void main2(){
+
+        }
+
+        public static void main1() {
             Scanner sc = new Scanner(System.in);
             while (sc.hasNextInt()) {
                 n = sc.nextInt();
@@ -144,7 +148,28 @@ public class Main {
      * 1
      * 3
      */
+    static class Souhu2{
+        public static void main(){
+            Scanner sc = new Scanner(System.in);
+            while (sc.hasNextLine()){
+                String str = sc.nextLine();
 
+            }
+        }
+
+        public static void getRes(String str){
+            StringBuffer bf = new StringBuffer(str);
+            for (int i = 5; i < str.length(); i++) {//前五个没有
+
+            }
+        }
+
+        /*每次拿出n个，旋转*/
+        public String getSub(int n ,StringBuffer bf){
+
+
+        }
+    }
     /*逆向思维法
     * 找到要删除的最小字符串，删除
     * 剩下的为最大数字
