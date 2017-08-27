@@ -32,6 +32,7 @@ public class Main {
         static int[] take;//每个桩子跳跃距离
         static boolean[][] like;// 每个桩子，可以跳跃的距离
         static List<Integer[]> jie = new ArrayList<>();//可行解
+        static Integer[] bestJie;
 
         static int res = 2000;//记录最后跳了几次，最小的次数。初始化为最大值
 
@@ -47,7 +48,7 @@ public class Main {
                 take = new int[n];
                 like = new boolean[n][n];
 
-                Arrays.fill(take, -1);    //初始化i桩子跳跃距离,默认没有距离
+                Arrays.fill(take, 0);    //初始化i桩子跳跃距离,默认没有距离
                 for (boolean[] booleans : like) {
                     Arrays.fill(booleans, false);
                 }
@@ -62,9 +63,15 @@ public class Main {
             }
         }
 
+        /*
+
+        39
+        3 6 6 6 3 8 9 8 5 2 9 7 3 6 5 4 2 3 6 9 9 8 6 4 1 0 4 4 8 9 3 6 0 7 8 1 1 8 4
+        */
         public static void tryNext(int i) {
+
             for (int j = 0; j < n; j++) {
-                if (like[i][j] ) {//&& take[j] == -1//这个可以一直分配
+                if (like[i][j]) {//&& take[j] == -1//这个可以一直分配
                     take[i] = j + 1;//把第j个距离，赋值给第i个桩子。
                     if (i == n - 1) {//最后一个桩子分配完毕
                         int sum = 0;
@@ -73,31 +80,39 @@ public class Main {
                             sum += take[k];
                             tmp[k] = take[k];
                         }
+                        if (sum >= 5) {
+                            jie.add(tmp);//记录解
 
-                        jie.add(tmp);
+                            /*更新最优解*/
+                            int tCount = 0;
+                            for (Integer integer : tmp) {
+                                if (integer > 0) {
+                                    tCount++;
+                                }
+                            }
+                            if (tCount < res) {
+                                res = tCount;//更新最小跳跃次数，和对应的解
+                                bestJie = tmp;
+                            }
+                        }
+
                     } else {
-                        tryNext(i + j + 1);
+
+                        tryNext(i + take[i]);
                     }
-                    take[j] = -1;
+                    take[i] = 0;
+                } else {
+                    break;
                 }
             }
         }
 
         public static void getRes() {
-
-//            for (Integer[] integers : jie) {
-//                int time = 0;
-//                for (Integer integer : integers) {
-//                    if (integer > 0) {
-//                        time += 1;
-//                    }
-//                }
-//                if (res > time) {
-//                    res = time;
-//                    System.out.println(integers.toString());
-//                }
-//            }
             System.out.println(res);
+//            System.out.println(Arrays.asList(bestJie).toString());
+//            for (Integer[] rec : jie) {
+//                System.out.println(Arrays.asList(rec).toString());
+//            }
         }
 
     }
@@ -130,7 +145,10 @@ public class Main {
      * 3
      */
 
-    /*逆向思维法*/
+    /*逆向思维法
+    * 找到要删除的最小字符串，删除
+    * 剩下的为最大数字
+    * */
     public static void souhu14() {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
@@ -151,7 +169,7 @@ public class Main {
             }
             String best = maxN.toString();
 
-            int index = 0;
+            int index = 0;//记录删除位置
             for (int i = 1; i <= bf.length() - remv; i++) {
                 String tmp = bf.substring(i, i + remv);
                 if (tmp.compareTo(best) < 0) {
