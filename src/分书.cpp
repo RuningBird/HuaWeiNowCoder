@@ -2,6 +2,7 @@
 #include <conio.h>
 using namespace std;
 
+
 int like[5][5] = {
 	{ 0,0,1,1,0 },
 	{ 1,1,0,0,1 },
