@@ -5,7 +5,56 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Souhu03.main1();
+        SouHu.main1();
+        System.out.println(SouHu.res);
+    }
+
+    static class SouHu {
+        static int[] arr;
+        static int res = 0;
+        public static void main1() {
+            Scanner sc = new Scanner(System.in);
+            while (sc.hasNextLine()) {
+                String rec = sc.nextLine();
+                String[] strArr = rec.split(" ");
+
+                res = strArr.length;
+                int sum = 0;
+                for (int i = 0; i < strArr.length; i++) {
+                    arr[i] = Integer.parseInt(strArr[i]);
+                    sum += arr[i];
+                }
+
+                if (sum == 0) {
+                    break;
+                }
+                getRes(arr);
+
+            }
+        }
+
+
+        public static int getRes(int[] arr) {
+
+            int sum = 36;
+            int crt = 0;
+            int remain = sum ;
+            for (int i = arr.length - 1; i >= 0; i--) {//
+                if (crt == sum || remain <= 0){
+                    res++;
+                    continue;//位置取完
+                }
+                /* 0 0 4 0 0 1*/
+                if (arr[i] != 0) {
+                    int n = arr[i];
+                    crt += i * i * n;
+                    remain -= crt;
+
+                }
+            }
+
+            return res;
+        }
     }
 
     /**
@@ -36,7 +85,7 @@ public class Main {
 
         static int res = 2000;//记录最后跳了几次，最小的次数。初始化为最大值
 
-        public static void main2(){
+        public static void main2() {
 
         }
 
@@ -148,16 +197,16 @@ public class Main {
      * 1
      * 3
      */
-    static class Souhu2{
-        public static void main(){
+    static class Souhu2 {
+        public static void main() {
             Scanner sc = new Scanner(System.in);
-            while (sc.hasNextLine()){
+            while (sc.hasNextLine()) {
                 String str = sc.nextLine();
 
             }
         }
 
-        public static void getRes(String str){
+        public static void getRes(String str) {
             StringBuffer bf = new StringBuffer(str);
             for (int i = 5; i < str.length(); i++) {//前五个没有
 
@@ -165,11 +214,12 @@ public class Main {
         }
 
         /*每次拿出n个，旋转*/
-        public String getSub(int n ,StringBuffer bf){
-
-
-        }
+//        public String getSub(int n, StringBuffer bf) {
+//
+//
+//        }
     }
+
     /*逆向思维法
     * 找到要删除的最小字符串，删除
     * 剩下的为最大数字
